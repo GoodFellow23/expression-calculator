@@ -5,11 +5,11 @@ function eval() {
 //" 20 * 60 + 9 - (  89 * 95 * 3 * (  44 - 51 - 11 - (  62 + 69 - 22 + 21  ) * 9  ) / 50  ) - (  94 - 70 / 29 / 7  ) "
 function expressionCalculator(expr) {
     let openBC=0;
-    let closeBC=0;
-    expr = Array.isArray(expr) ? expr : expr.match(/((\d\d|\d)|\+|\/|\(|\)|\-|\*)/mg).map( el => Number.isInteger(parseInt(el)) ? parseInt(el) : el);
+    let closeBC=0;                         
+    expr = Array.isArray(expr) ? expr : expr.match(/((\d\d\d|\d\d|\d)|\+|\/|\(|\)|\-|\*)/mg).map( el => Number.isInteger(parseInt(el)) ? parseInt(el) : el);
         
            openBC = expr.lastIndexOf("(");
-           closeBC = expr.indexOf(")",openBC);        
+           closeBC = expr.indexOf(")",openBC == -1 ? 0: openBC);        
 
          if ((openBC != -1 && closeBC == -1) || (openBC == -1 && closeBC != -1)) throw new Error("ExpressionError: Brackets must be paired");
          if (openBC == -1 && closeBC == -1 ) {            
